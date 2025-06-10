@@ -69,8 +69,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
-            docker stop ci-cd-app || true
-            docker rm ci-cd-app || true
-            docker run -d --name ci-cd-app -p 80:3000 ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
+            sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
+            sudo docker stop ci-cd-app || true
+            sudo docker rm ci-cd-app || true
+            sudo docker run -d --name ci-cd-app -p 80:3000 ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
