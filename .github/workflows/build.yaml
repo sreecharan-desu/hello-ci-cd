@@ -1,6 +1,4 @@
-# .github/workflows/ci.yml
-
-name: Build and Push Next.js Docker Image
+name: Build, Push, and Deploy Next.js Docker Image
 
 on:
   push:
@@ -56,3 +54,23 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
+
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Pull and Run Docker image on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            docker pull ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
+            docker stop ci-cd-app || true
+            docker rm ci-cd-app || true
+            docker run -d --name ci-cd-app -p 80:3000 ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
