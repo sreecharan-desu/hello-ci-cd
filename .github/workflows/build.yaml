@@ -73,4 +73,4 @@ jobs:
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
             sudo docker stop ci-cd-app || true
             sudo docker rm ci-cd-app || true
-            sudo docker run -d --name ci-cd-app -p 80:3000 ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
+            sudo docker run -d --name ci-cd-app -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
