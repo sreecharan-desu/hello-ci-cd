@@ -147,7 +147,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           {/* Logo and Copyright */}
           <div className="flex items-center space-x-2">
-            <span className="font-bold text-white text-xl sm:text-2xl">uniZ</span>
+            <span className="font-bold text-white text-xl sm:text-2xl">CI/CD</span>
             <span className="text-gray-400 text-sm mt-1">© {year}</span>
           </div>
 
