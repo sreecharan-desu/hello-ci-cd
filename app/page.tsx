@@ -131,7 +131,7 @@ export default function Home() {
 import { FaDiscord, FaGithub, FaLinkedin, FaYoutube} from "react-icons/fa";
 import { FaXTwitter } from 'react-icons/fa6';
 
-export function Footer() {
+function Footer() {
   const year = new Date().getFullYear();
   const socialLinks = [
     { name: "GitHub", url: "https://github.com/sreecharan-desu", icon: FaGithub },
